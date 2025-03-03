@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="number" name="width" placeholder="Enter number of cells">
+<input type="number" name="height" placeholder="Enter number of rows">
+<input type="text" name="content" placeholder="Enter cell content">
+<button>Create table</button>
+<table style="margin-top: 10px; border: 1px solid black"></table>
+<script>
+
+  const button = document.querySelector('button');
+  button.addEventListener('click', () => {
+    const width = document.querySelector('input[name=width]').value;
+    const height = document.querySelector('input[name=height]').value;
+    const content = document.querySelector('input[name=content]').value;
+    let table = document.querySelector('table');
+    table.innerHTML = '';
+    for (let i = 0; i < height; i++) {
+      const tr = document.createElement('tr');
+      for (let j = 0; j < width; j++) {
+        const td = document.createElement('td');
+        td.innerHTML = content;
+        tr.appendChild(td);
+      }
+      table.appendChild(tr);
+    }
+    document.body.appendChild(table);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="number" placeholder="Enter weight in kg">
+<div id="result"></div>
+<script>
+  function calculate() {
+    if (input.value <= 0)
+      return;
+    const result = document.querySelector('#result');
+    result.innerHTML = `Weight in pounds: ${Math.round(input.value / 0.45 * 100) / 100}`;
+  }
+  let input = document.querySelector('input');
+  input.addEventListener('change', function (e) {
+    calculate();
+    e.stopPropagation();
+  });
+  input.addEventListener('keyup', function (e) {
+    calculate();
+    e.stopPropagation();
+  });
+</script>
+</body>
+</html>

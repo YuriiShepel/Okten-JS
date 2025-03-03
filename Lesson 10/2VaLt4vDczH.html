@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="counter">1</div>
+<script>
+    const container = document.querySelector("#counter");
+    const counter = +localStorage.getItem("counter") + 1;
+    container.innerText = counter;
+    localStorage.setItem("counter", counter);
+</script>
+</body>
+</html>

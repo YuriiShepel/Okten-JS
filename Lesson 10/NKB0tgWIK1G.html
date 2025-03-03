@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="container" style="margin-bottom: 10px;"></div>
+<button id="prev" style="width: 50px; text-align: center;">Prev</button>
+<div id="pageNumber" style="display: inline-block; width: 60px; text-align: center;">Page 1</div>
+<button id="next" style="width: 50px; text-align: center;">Next</button>
+<script>
+    function generateData() {
+        let data = [];
+        for (let i = 0; i < 100; i++) {
+            data.push({
+                name: `name${i + 1}`,
+                age: Math.round(Math.random() * 100),
+            })
+        }
+        return data;
+    }
+
+    function getData(page) {
+        return data.slice((page - 1) * 10, (page - 1) * 10 + 10);
+    }
+
+    function generateContainer(page) {
+        const currentData = getData(page);
+        const container = document.getElementById("container");
+        container.innerHTML = "";
+        for (const currentObject of currentData) {
+            const element = document.createElement("div");
+            element.innerHTML = `Name: ${currentObject.name}, age: ${currentObject.age}`;
+            container.appendChild(element);
+        }
+    }
+
+    const prevBtn = document.getElementById("prev");
+    const nextBtn = document.getElementById("next");
+    prevBtn.addEventListener("click", () => {
+        if (page === 1)
+            return;
+        page--;
+        generateContainer(page);
+        document.querySelector("#pageNumber").innerHTML = `Page ${page}`;
+    });
+    nextBtn.addEventListener("click", () => {
+        if (page === 10)
+            return;
+        page++;
+        generateContainer(page);
+        document.querySelector("#pageNumber").innerHTML = `Page ${page}`;
+    })
+
+    let data = generateData();
+    let page = 1;
+    generateContainer(page);
+</script>
+</body>
+</html>

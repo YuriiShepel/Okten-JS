@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form>
+    <input type="text" name="name" placeholder="Enter your name">
+    <input type="text" name="surname" placeholder="Enter your surname">
+    <input type="text" name="age" placeholder="Enter your age">
+    <button>Create object</button>
+</form>
+<script>
+    const button = document.querySelector('button');
+    button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const name = document.querySelector('[name=name]').value;
+        const surname = document.querySelector('[name=surname]').value;
+        const age = document.querySelector('[name=age]').value;
+        const objectDiv = document.createElement('div');
+        objectDiv.innerHTML = JSON.stringify({name: name, surname: surname, age: age});
+        document.body.appendChild(objectDiv);
+    });
+</script>
+</body>
+</html>

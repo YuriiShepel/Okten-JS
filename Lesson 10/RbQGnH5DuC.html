@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  for (let i = 1; i <= 5; i++) {
+    localStorage.setItem(`array${i}`, JSON.stringify([]));
+  }
+
+  function addToLocalStorage(arrayName,objToAdd){
+    let target = localStorage.getItem(arrayName);
+    target = JSON.parse(target);
+    target.push(objToAdd);
+    localStorage.setItem(arrayName, JSON.stringify(target));
+  }
+
+  addToLocalStorage('array2',{name: "John", surname: "Snow"});
+  addToLocalStorage('array2',{name: "Rob", surname: "Stark"});
+  addToLocalStorage('array3',{name: "Jame", surname: "Lanister"});
+
+
+</script>
+</body>
+</html>

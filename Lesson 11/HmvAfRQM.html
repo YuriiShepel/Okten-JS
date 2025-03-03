@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+         body {
+             font-family: Arial, sans-serif;
+             margin: 20px;
+             background-color: #f8f9fa;
+         }
+
+        .cart-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .cart-card {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-header {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .cart-info {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .product-card {
+            flex: 1 1 calc(50% - 10px);
+            background: #fff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .product-details {
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .product-info {
+            font-size: 14px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<div class="cart-container"></div>
+<script>
+    fetch('https://dummyjson.com/carts')
+        .then(res => {
+            console.log(res);
+            return res.json()
+        })
+        .then(data => {
+            const cartContainer = document.querySelector('.cart-container');
+            cartContainer.innerHTML = '';
+
+            for (const cart of data.carts) {
+                const cartCard = document.createElement('div');
+                cartCard.classList.add('cart-card');
+
+                cartCard.innerHTML = `
+                    <div class="cart-header">Cart ID: ${cart.id} (User: ${cart.userId})</div>
+                    <div class="cart-info">Total Products: ${cart.totalProducts} | Total Quantity: ${cart.totalQuantity}</div>
+                    <div class="cart-info">Total Price: $${cart.total.toFixed(2)} | Discounted Total: $${cart.discountedTotal.toFixed(2)}</div>
+                    <div class="product-list"></div>
+                `;
+
+                const productList = cartCard.querySelector('.product-list');
+
+                for (product of cart.products) {
+                    const productCard = document.createElement('div');
+                    productCard.classList.add('product-card');
+
+                    productCard.innerHTML = `
+                        <img src="${product.thumbnail}" alt="${product.title}">
+                        <div class="product-details">
+                            <div class="product-title">${product.title}</div>
+                            <div class="product-info">Price: $${product.price.toFixed(2)}</div>
+                            <div class="product-info">Quantity: ${product.quantity}</div>
+                            <div class="product-info">Total: $${product.total.toFixed(2)}</div>
+                            <div class="product-info">Discount: ${product.discountPercentage}%</div>
+                            <div class="product-info">Discounted Total: $${product.discountedTotal.toFixed(2)}</div>
+                        </div>
+                    `;
+                    productList.appendChild(productCard);
+                };
+                cartContainer.appendChild(cartCard);
+            };
+        });
+</script>
+</body>
+</html>

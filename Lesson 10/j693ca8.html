@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text"  placeholder="Enter an age">
+<button onclick="getAge()">Check Age</button>
+<script>
+  function getAge() {
+    const age = document.querySelector("input").value;
+    if (!age)
+      return;
+    alert(age < 18 ? "Age must be greater than 18" : "Age is correct");
+  }
+</script>
+</body>
+</html>
